@@ -135,6 +135,11 @@ void classify(char *acc, int acci, lexer_tokenNode *parent) {
 		}
 	}
 
+	if (newRaw[0] == '-' && newRaw[1] >= '0' && newRaw[1] <= '9') {
+		new->type = Numerictoken;
+		matched = 1;
+	}
+
 	if (!matched) {
 		for (i = 0; i < acci; i++) {
 			if (newRaw[i] > '9' || newRaw[i] < '0') {

@@ -53,6 +53,8 @@ AST_expr *parser_parseExpr(lexer_tokenNode **token, int numTokens, bool topLevel
 					c->value = (int) strtol(token[0]->raw + 2, NULL, 16); // Bit of naughty pointer arithmetic...
 				} else if (strncmp(token[0]->raw, "#b", 2) == 0) {
 					c->value = (int) strtol(token[0]->raw + 2, NULL, 2);
+                } else if (token[0]->raw[0] == '-') {
+                    c->value = -atoi(token[0]->raw + 1);
 				} else {
 					c->value = atoi(token[0]->raw);
 				}				
