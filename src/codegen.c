@@ -640,6 +640,12 @@ void codegen_emit(AST_expr *expr, int parent_numArgs, FILE *outputFile) {
 				fprintf(outputFile, "\tAND CRSl, GP1\n\tAND CRSh, GP2\n");
 			}
 
+			else if (strcmp(expr->primproc, "get-environment-variable") == 0 && expr->numBody == 1) {
+				expr->type = Constant;
+				expr->value->type = Stringconst;
+				expr->value->strvalue = getenv(expr->body[0]->value->strvalue);
+			}
+
 			else {
 				fprintf(stderr, "ERROR 26: No primitive '%s' taking %i arguments.\n", expr->primproc, expr->numBody);
 				exit(1);
